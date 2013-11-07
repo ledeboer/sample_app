@@ -4,6 +4,8 @@ ruby '2.0.0'
 
 gem 'rails', '4.0.0'
 gem 'bootstrap-sass', '2.3.2.0'
+gem 'bcrypt-ruby', '~> 3.0.0'
+#gem 'bcrypt-ruby', '3.1.2'
 
 group :development, :test do
   gem 'pg', '0.15.1'
