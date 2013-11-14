@@ -7,7 +7,7 @@ $(document).ready(function() {
   });
   $("#micropost_content").keydown(function(event) {
     var charsRemaining = 140 - $(this).val().length;
-    if ( charsRemaining <= 0 ) {
+    if ( event.keyCode > 46 && charsRemaining <= 0 ) {
       event.preventDefault();
     }
   });
