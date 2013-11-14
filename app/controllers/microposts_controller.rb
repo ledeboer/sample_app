@@ -4,12 +4,18 @@ class MicropostsController < ApplicationController
 
   def create
     @micropost = current_user.microposts.build(micropost_params)
-    if @micropost.save
-      flash[:success] = "Micropost created!"
+    if @micropost.content.include?(" cats") || @micropost.content.include?("cats ") || @micropost.content.include?("cat ") || @micropost.content.include?(" cat")
+    then
+      flash[:fail] = "I said no cats!"
       redirect_to root_url
     else
-      @feed_items = []
-      render 'static_pages/home'
+      if @micropost.save
+        flash[:success] = "Micropost created!"
+        redirect_to root_url
+      else
+        @feed_items     = []
+        render 'static_pages/home'
+      end
     end
   end
 
