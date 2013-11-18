@@ -1,0 +1,31 @@
+<% provide(:title, 'Reports') %>
+
+<% if signed_in? && current_user.admin? %>
+  <div class="row">
+    <div class="span12">
+      <h3>Admin reports about the system</h3>
+    </div>
+    <aside class="span4">
+      <section>
+        <strong>Number of users: <%= User.count %></strong>
+      </section>
+      <section>
+        <strong>Number of microposts: <%= Micropost.count %></strong>
+      </section>
+    </aside>
+
+    <div class="span8">
+    <% @users.each do |user| %>
+    <ul class="users">
+      <%= link_to user.name, user %>, Microposts: <%= user.microposts.count %>
+    </ul>
+    <% end %>
+    </div>
+    
+  </div>
+<% else %>
+
+Hmm, well we're going to "report" you for snooping!
+
+<% end %>
+

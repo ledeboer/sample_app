@@ -4,7 +4,10 @@ class MicropostsController < ApplicationController
 
   def create
     @micropost = current_user.microposts.build(micropost_params)
-    if @micropost.content.include?(" cats") || @micropost.content.include?("cats ") || @micropost.content.include?("cat ") || @micropost.content.include?(" cat")
+    # First apply my content filter
+    @micropost.content.gsub!( /fuck/i, "frack")
+    @micropost.content.gsub!( /shit/i, "poop")
+    if @micropost.content.match(/.*\bcat\b.*/ix) || @micropost.content.match(/.*\bcats\b.*/ix)
     then
       flash[:fail] = "I said no cats!"
       redirect_to root_url
@@ -13,7 +16,7 @@ class MicropostsController < ApplicationController
         flash[:success] = "Micropost created!"
         redirect_to root_url
       else
-        @feed_items     = []
+        @feed_items = []
         render 'static_pages/home'
       end
     end
